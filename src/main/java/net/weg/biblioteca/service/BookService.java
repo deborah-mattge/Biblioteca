@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import net.weg.biblioteca.model.Status;
 import net.weg.biblioteca.model.dtos.get.BookGetDTO;
 import net.weg.biblioteca.model.dtos.get.CopyGetDTO;
+import net.weg.biblioteca.model.dtos.get.ReservationGetDTO;
 import net.weg.biblioteca.model.dtos.post.BookPostDTO;
 import net.weg.biblioteca.model.dtos.post.CopyPostDTO;
-import net.weg.biblioteca.model.entity.Book;
-import net.weg.biblioteca.model.entity.Copy;
-import net.weg.biblioteca.model.entity.User;
+import net.weg.biblioteca.model.entity.*;
 import net.weg.biblioteca.repository.BookRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -37,6 +36,7 @@ public class BookService {
         bookRepository.save(book);
         CopyGetDTO copyGetDTO = new CopyGetDTO();
         BeanUtils.copyProperties(copy, copyGetDTO);
+        copyGetDTO.setBookId(book.getId());
         return copyGetDTO;
     }
     public BookGetDTO patchAutor(Long id, String autor){
@@ -69,6 +69,7 @@ public class BookService {
         }
         return bookGetDTOS;
     }
+
     private BookGetDTO transformGetDTO(Book book){
         BookGetDTO bookGetDTO = new BookGetDTO();
         BeanUtils.copyProperties(book, bookGetDTO);

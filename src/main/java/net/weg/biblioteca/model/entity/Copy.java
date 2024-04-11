@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import net.weg.biblioteca.model.Status;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +19,10 @@ public class Copy {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private LocalDateTime aquirement;
+    private LocalDateTime aquirement = LocalDateTime.now();
     @ManyToOne
     private Book book;
+
+    @OneToMany(mappedBy = "copy")
+    private Collection<Reservation> reservations;
 }

@@ -19,8 +19,6 @@ public class Book {
     private String autor;
     private String genre;
     private Integer publishYear;
-    @OneToMany
-    private Collection<Reservation> reservations;
     @OneToMany(mappedBy = "book")
     private Collection<Reading> readings;
     @OneToMany(cascade = CascadeType.ALL)
